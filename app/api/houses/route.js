@@ -22,20 +22,40 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  const { title, image } = body;
+  const {
+    title,
+    roomType,
+    description,
+    amount,
+    noOfGuests,
+    currentBookings,
+    months,
+    images,
+  } = body;
   console.log(body);
 
   try {
     await connectMongoDB();
     let houseExist;
-    houseExist = await House.findOne({ title });
+    houseExist = await House.findOne({
+      title,
+    });
     if (houseExist) {
       return NextResponse.json(
         { message: "This house already exist" },
         { status: 409 }
       );
     }
-    const house = new House({ title, image });
+    const house = new House({
+      title,
+      roomType,
+      description,
+      amount,
+      noOfGuests,
+      currentBookings,
+      months,
+      images,
+    });
     await house.save();
 
     return NextResponse.json(

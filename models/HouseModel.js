@@ -5,9 +5,25 @@ const HouseSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  roomType: {
     type: String,
+    required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: String,
+    required: true,
+  },
+  noOfGuests: {
+    type: String,
+    required: true,
+  },
+  currentBookings: [],
+  months: [],
+  images: [],
 });
 
 const House = models.House || model("House", HouseSchema);
